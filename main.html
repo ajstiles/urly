@@ -1,0 +1,41 @@
+{% comment %}
+// Variables for this template:
+// urly - this is an urly instance to show (we use code and href properties)
+// error_404 - an error message to show the user
+// default_href - default href to dump into text area. Why do we have this?
+// error_href - set when we have an improperly formatted href
+{% endcomment %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head><title>ur.ly - dang short urls</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="static/urly.js"></script>
+</head>
+<body style="font-family: verdana, arial; font-size: 80%; text-align: center">
+<div style="margin: 0 auto; width: 600px; border: 1px solid #cccccc; padding: 10px; text-align: left;">
+
+<span style="float: right"><a href="http://code.google.com/appengine/"><img border="0" src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" /></a></span>
+<a href="/"><img border="0" style="padding-top: 3px;" src="static/urly.gif" alt=" - dang short urls" /></a>
+
+{% if error_404 or urly or error_href %}
+<div style="margin-top: 5px; margin-bottom: 15px; padding: 10px; background-color: #e6e6ff; border: 1px dashed #cccccc;">
+  {% if error_404 %}Oops - we couldn't find that urly.{% endif %}
+  {% if error_href %}Oops - that address doesn't look right... we can't create a dang short url from it.{% endif %}
+  {% if urly %}
+  {{ urly.href }} is now dang short, and <b>its already on your clipboard</b>.<br />
+  <input id="href" name="href" type="text" style="margin-top: 5px; padding: 3px; width: 300px; border: 1px solid #cccccc;" value="http://ur.ly/{{ urly.code }}" />
+  <script type="text/javascript" language="javascript">window.onload = copy("http://ur.ly/{{ urly.code }}");</script>
+  <script type="text/javascript" language="javascript">window.onload = focus("href");</script>
+  &nbsp;&nbsp;<a href="http://ur.ly/{{ urly.code }}">Try It</a>
+  {% endif %}
+</div>
+{% endif %}
+
+<div style="padding-bottom: 3px;">Enter a long URL below and we'll make it dang short:</div>
+<form action="new.html" method="get" accept-charset="utf-8">
+<textarea style="margin-bottom: 5px; width: 100%; border: 1px solid #cccccc;" name="href" id="href" rows="4">{{ default_href }}</textarea>
+<input type="submit" value="Create" />
+</form>
+<div style="margin-top: 10px; padding-top: 5px; border-top: 1px solid #dddddd;"><span style="float: right"><a href="http://code.google.com/p/urly/">Project</a> <a href="http://code.google.com/p/urly/wiki/APIDocumentation">API</a></span>Drag this link to your browser toolbar: <a href="javascript:location.href='http://ur.ly/new.html?href='+encodeURIComponent(location.href)">ur.ly!</a></div>
+</div>
+</div></body></html>
