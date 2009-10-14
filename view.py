@@ -31,6 +31,8 @@ class MainView():
                 render_raw(handler, "application/json", urly.to_json())
             elif (format == '.xml'):
                 render_raw(handler, "application/xml", urly.to_xml())
+            elif (format == '.txt'):
+                render_raw(handler, "text/plain", urly.to_text())
             else:
                 render_main(handler, { 'urly': urly })
         elif (status == 400):

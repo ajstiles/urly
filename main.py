@@ -63,7 +63,7 @@ class MainHandler(webapp.RequestHandler):
 
 def main():
     application = webapp.WSGIApplication([
-        ('/([a-zA-Z0-9]{1,6})?(.xml|.json|.html)?', MainHandler)
+        ('/([a-zA-Z0-9]{1,6})?(.xml|.json|.html|.txt)?', MainHandler)
     ], debug=True)
     wsgiref.handlers.CGIHandler().run(application)
 

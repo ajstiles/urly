@@ -41,6 +41,9 @@ class Urly(db.Model):
         msg += "<urly code=\"%s\" href=\"%s\" />\n" % (self.code(), self.href)
         return msg
 
+    def to_text(self):
+        return "http://ur.ly/%s" % self.code()
+
     def save_in_cache(self):
         """We don't really care if this fails"""
         memcache.set(self.code(), self)
