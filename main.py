@@ -17,13 +17,15 @@ __author__ = 'Adam Stiles'
 All Urly records in the database have an id and an href. We base62 that
 integer id to create a short code that represents that Urly.
 
-/{code}                             Redirect user to urly with this code
-/{code}(.json|.xml|.html)           Show user formatted urly with this code
-/new(.json|.xml|.html)?href={href}  Create a new urly with this href or
-                                    return existing one if it already exists
-                                    Note special handling for 'new' code
-                                    when we have a href GET parameter 'cause
-                                    'new' by itself looks like a code
+Format options are: json, xml, html, and txt
+
+/{code}                     Redirect user to urly with this code
+/{code}(.format)            Show user formatted urly with this code
+/new(.format)?href={href}   Create a new urly with this href or
+                            return existing one if it already exists
+                            Note special handling for 'new' code
+                            when we have a href GET parameter 'cause
+                            'new' by itself looks like a code
 """
 import wsgiref.handlers
 import re, os, logging
