@@ -9,6 +9,7 @@
 
 from google.appengine.ext import db
 from google.appengine.api import memcache
+import cgi
 import logging
 
 class Urly(db.Model):
@@ -38,7 +39,7 @@ class Urly(db.Model):
     def to_xml(self):
         """Like JSON, XML is simple enough that we won't template now"""
         msg = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-        msg += "<urly code=\"%s\" href=\"%s\" />\n" % (self.code(), self.href)
+        msg += "<urly code=\"%s\" href=\"%s\" />\n" % (self.code(), cgi.escape(self.href))
         return msg
 
     def to_text(self):
