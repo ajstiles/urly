@@ -35,11 +35,11 @@ from urly import Urly
 from view import MainView
 
 class MainHandler(webapp.RequestHandler):
-     """All non-static requests go through this handler.
-     The code and format parameters are pre-populated by
-     our routing regex... see main() below.
-     """
-     def get(self, code, format):
+    """All non-static requests go through this handler.
+    The code and format parameters are pre-populated by
+    our routing regex... see main() below.
+    """
+    def get(self, code, format):
         if (code is None):
             MainView.render(self, 200, None, format)
             return
@@ -62,6 +62,16 @@ class MainHandler(webapp.RequestHandler):
                 MainView.render(self, 200, u, format)
             else:
                 MainView.render(self, 404, None, format)
+    
+    def head(self, code, format):
+        if (code is None):
+            self.error(400)
+        else:
+            u = Urly.find_by_code(str(code))
+            if u is not None:
+                self.redirect(u.href)
+            else:
+                self.error(404)
 
 def main():
     application = webapp.WSGIApplication([
