@@ -44,12 +44,13 @@ class MainHandler(webapp.RequestHandler):
             MainView.render(self, 200, None, format)
             return
         
-        href = self.request.get('href').strip()
+        href = self.request.get('href').strip().encode('utf-8')
+        title = self.request.get('title').strip().encode('utf-8')
         if (code == 'new') and (href is not None):
             try:
                 u = Urly.find_or_create_by_href(href)
                 if u is not None:
-                    MainView.render(self, 200, u, format)
+                    MainView.render(self, 200, u, format, href, title)
                 else:
                     logging.error("Error creating urly by href: %s", str(href))
                     MainView.render(self, 400, None, format, href)

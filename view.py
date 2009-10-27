@@ -13,7 +13,7 @@ from google.appengine.ext.webapp import template
 class MainView():
     """Helper method for our one-and-only template. All display goes through here"""
     @staticmethod
-    def render(handler, status, urly, format, href=None):
+    def render(handler, status, urly, format, href=None, title=None):
         """Lovin my delphi-like inner functions"""
         def render_raw(handler, content_type, body):
             handler.response.headers["Content-Type"] = content_type
@@ -34,7 +34,7 @@ class MainView():
             elif (format == '.txt'):
                 render_raw(handler, "text/plain", urly.to_text())
             else:
-                render_main(handler, { 'urly': urly })
+                render_main(handler, { 'urly': urly, 'title': title })
         elif (status == 400):
             handler.error(status)
             if (format != '.json') and (format != '.xml'): 
