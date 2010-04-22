@@ -7,14 +7,21 @@
 {% endcomment %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
-<head><title>ur.ly - dang short urls</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="text/javascript" src="static/urly.js"></script>
+<head>
+  <title>ur.ly - dang short urls</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta property="og:title" content="ur.ly - dang short urls" />
+  <meta property="og:url" content="http://ur.ly/" />
+  <meta property="og:type" content="website" />
+  <meta property="fb:app_id" content="119997331350557" />
+  <script type="text/javascript" src="static/urly.js"></script>
 </head>
 <body style="font-family: verdana, arial; font-size: 80%; text-align: center">
-<div style="margin: 0 auto; width: 600px; border: 1px solid #efefef; padding: 20px; text-align: left;">
+<div style="margin: 0 auto; width: 600px; padding: 20px; text-align: left;">
 
-<span style="float: right"><a href="http://code.google.com/appengine/"><img border="0" src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" /></a></span>
+<span style="float: right">
+  <a href="http://code.google.com/appengine/"><img border="0" src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" /></a>
+</span>
 <a href="/"><img border="0" style="padding-top: 3px;" src="static/urly.gif" alt=" - dang short urls" /></a>
 
 {% if error_404 or urly or error_href %}
@@ -38,8 +45,25 @@
 <textarea style="margin-bottom: 5px; width: 100%; border: 1px solid #cccccc;" name="href" id="href" rows="4">{{ default_href }}</textarea>
 <input type="submit" value="Create" />
 </form>
-<div style="margin-top: 10px; padding-top: 5px; border-top: 1px solid #f1f1f1;"><span style="float: right"><a href="http://github.com/ajstiles/urly">Code</a> and <a href="http://wiki.github.com/ajstiles/urly">API</a></span>Drag this link to your browser toolbar:&nbsp;
-  <a href="javascript:location.href='http://ur.ly/new.html?href='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title)">ur.ly!</a></div>
+
+<div style="margin-top: 10px; padding-top: 5px; border-top: 1px solid #f1f1f1;"><span style="float: right"><a href="http://github.com/ajstiles/urly">Code</a> and <a href="http://wiki.github.com/ajstiles/urly">API</a></span>
+  <div id="fb-root"></div>
+  <script src="http://connect.facebook.net/en_US/all.js"></script>
+  <script>
+    FB.init({
+      appId  : '119997331350557',
+      status : true, // check login status
+      cookie : true, // enable cookies to allow the server to access the session
+      xfbml  : true  // parse XFBML
+    });
+  </script>
+
+  <p>Drag this link to your browser toolbar:&nbsp;
+  <a href="javascript:location.href='http://ur.ly/new.html?href='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title)">ur.ly!</a>
+  </p>
+  <div><fb:like href="http://ur.ly/" layout="standard" show_faces="true" width="450" action="like" colorscheme="light" /></div>
+
+  </div>
 </div>
 </div>
 <script type="text/javascript">
