@@ -15,6 +15,7 @@
   <meta property="og:type" content="website" />
   <meta property="fb:admins" content="534232326" />
   <script type="text/javascript" src="static/urly.js"></script>
+  <script src="http://platform.twitter.com/anywhere.js?id=tlX9TVcBj0bfPI6E1rE9lA&v=1" type="text/javascript"></script>
 </head>
 <body style="font-family: verdana, arial; font-size: 80%; text-align: center">
 <div style="margin: 0 auto; width: 600px; padding: 20px; text-align: left;">
@@ -25,34 +26,45 @@
 <a href="/"><img border="0" style="padding-top: 3px;" src="static/urly.gif" alt=" - dang short urls" /></a>
 
 {% if error_404 or urly or error_href %}
-<div style="margin-top: 5px; margin-bottom: 15px; padding: 10px; background-color: #efefff; border: 1px dashed #cccccc;">
+<div style="margin-top: 5px; margin-bottom: 15px;">
   {% if error_404 %}Oops - we couldn't find that urly.{% endif %}
   {% if error_href %}Oops - that address doesn't look right... we can't create a dang short url from it.{% endif %}
   {% if urly %}
   {{ urly.href }} is now dang short, and <b>its already on your clipboard</b>.<br />
-  <input id="href" name="href" type="text" style="margin-top: 5px; padding: 3px; width: 300px; border: 1px solid #cccccc;" value="http://ur.ly/{{ urly.code }}" />
+  <input id="href" name="href" type="text" style="margin-top: 5px; padding: 3px; width: 600px; border: 1px solid #cccccc;" value="http://ur.ly/{{ urly.code }}" />
   <script type="text/javascript" language="javascript">window.onload = copy("http://ur.ly/{{ urly.code }}");</script>
   <script type="text/javascript" language="javascript">window.onload = focus("href");</script>
-  <div style="margin-top:5px">
+  <div style="margin-top:15px">
+    Tweet about your ur.ly:
+    <div id="tbox"></div>
+    <script type="text/javascript">
+      twttr.anywhere(function (T) {
+        T("#tbox").tweetBox({
+          height: 65,
+          width: 600,
+          counter: false,
+          defaultContent: "{{ title }} http://ur.ly/{{ urly.code }}",
+          label: " "
+        });
+      });
+    </script>
   <a href="http://ur.ly/{{ urly.code }}">Try your ur.ly</a> or share on <a href="http://twitter.com/home?status={{ title|urlencode }}+http%3A%2F%2Fur.ly%2F{{ urly.code }}">Twitter</a> or <a href="http://www.facebook.com/sharer.php?u=http%3A%2F%2Fur.ly%2F{{ urly.code }}&t={{ title|urlencode }}">Facebook</a>  
   </div>
   {% endif %}
 </div>
 {% endif %}
 
+{% if not urly %}
 <div style="padding-bottom: 3px;">Enter a long URL below and we'll make it dang short:</div>
 <form action="new.html" method="get" accept-charset="utf-8">
 <textarea style="margin-bottom: 5px; width: 100%; border: 1px solid #cccccc;" name="href" id="href" rows="4">{{ default_href }}</textarea>
 <input type="submit" value="Create" />
 </form>
+{% endif %}
 
 <div style="margin-top: 10px; padding-top: 5px; border-top: 1px solid #f1f1f1;"><span style="float: right"><a href="http://github.com/ajstiles/urly">Code</a> and <a href="http://wiki.github.com/ajstiles/urly">API</a></span>
-  <p>Drag this link to your browser toolbar:&nbsp;
+  Drag this link to your browser toolbar:&nbsp;
   <a href="javascript:location.href='http://ur.ly/new.html?href='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title)">ur.ly!</a>
-  </p>
-  <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fur.ly%2F&amp;layout=standard&amp;show_faces=false&amp;width=450&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowTransparency="true" style="border:none; overflow:hidden; width:450px; height:px"></iframe>
-  </div>
-</div>
 </div>
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
