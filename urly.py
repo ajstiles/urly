@@ -34,7 +34,7 @@ class Urly(db.Model):
         
     def to_json(self):
         """JSON is so simple that we won't worry about a template at this point"""
-        return "{\"code\":\"%s\",\"href\":\"%s\"}\n" % (self.code(), self.href)
+        return "{\"code\":\"%s\",\"href\":\"%s\"}\n" % (self.code(), self.href);
     
     def to_xml(self):
         """Like JSON, XML is simple enough that we won't template now"""
@@ -43,7 +43,7 @@ class Urly(db.Model):
         return msg
 
     def to_text(self):
-        return self.href
+        return "http://ur.ly/%s" % self.code()
 
     def save_in_cache(self):
         """We don't really care if this fails"""
